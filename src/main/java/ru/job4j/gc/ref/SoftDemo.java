@@ -7,14 +7,20 @@ import java.util.List;
 public class SoftDemo {
 
     public static void main(String[] args) {
-        //example1();
-        example2();
+        example1();
+        //example2();
     }
 
     private static void example1() {
-        Object strong = new Object();
+        Object strong = new Object() {
+            @Override
+            protected void finalize() throws Throwable {
+                System.out.println("Object removed!");
+            }
+        };
         SoftReference<Object> soft = new SoftReference<>(strong);
         strong = null;
+        System.gc();
         System.out.println(soft.get());
     }
 

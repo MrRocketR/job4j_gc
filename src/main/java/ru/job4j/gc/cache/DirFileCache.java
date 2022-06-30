@@ -28,7 +28,7 @@ public class DirFileCache extends AbstractCache<String, String> {
                 Path path = Paths.get(String.valueOf(subfile.getAbsoluteFile()));
                 try {
                     String read = Files.readAllLines(path).get(0);
-                    SoftReference<String> v = new SoftReference<>(k);
+                    SoftReference<String> v = new SoftReference<>(read);
                     cache.putIfAbsent(k, v);
                 } catch (IOException e) {
                     e.printStackTrace();
