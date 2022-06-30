@@ -18,29 +18,13 @@ public class DirFileCache extends AbstractCache<String, String> {
 
     @Override
     protected String load(String key) {
-        System.out.println(key);
-        File dir = new File(key);
-        if (dir.exists()) {
-            System.out.println("YES");
-            for (File subfile : Objects.requireNonNull(dir.listFiles())) {
-                System.out.println(subfile.getName());
-                String k = subfile.getName();
-                Path path = Paths.get(String.valueOf(subfile.getAbsoluteFile()));
-                try {
-                    String read = Files.readAllLines(path).get(0);
-                    SoftReference<String> v = new SoftReference<>(read);
-                    cache.putIfAbsent(k, v);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
+        String output = null;
+        try {
+            output = Files.readString(Path.of(cachingDir, key));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return cachingDir;
-    }
-
-    @Override
-    public String toString() {
-        return  cachingDir;
+        return output;
     }
 }
+
