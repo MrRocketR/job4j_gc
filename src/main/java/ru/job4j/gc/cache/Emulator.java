@@ -68,20 +68,6 @@ public class Emulator {
         System.out.println(text);
     }
 
-    public static void test() {
-        String dir = "D:\\projects\\job4j_gc\\src\\cache";
-        String file = "Names.txt";
-        String text = null;
-        try {
-            text =  Files.readString(Path.of(dir, file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(text);
-    }
-
-
-
     public static void main(String[] args) {
         Emulator emulator = new Emulator();
        emulator.startUI();
