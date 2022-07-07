@@ -1,25 +1,25 @@
 package ru.job4j.gc.cache;
 
-
-import java.io.IOException;
-import java.lang.ref.SoftReference;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
-
 
 public class Emulator {
     private DirFileCache dirFileCache;
     private final Scanner scanner = new Scanner(System.in);
+    private final String startText =
+            "Выберите действие" + System.lineSeparator()
+    + " 1 - указать кэшируемую директорию" + System.lineSeparator()
+    + " 2 - загрузить содержимое файла в кэш" + System.lineSeparator()
+    + " 3 - получить содержимое файла из кэша" + System.lineSeparator()
+    + " 4 - выход";
+    private final int setDir = 1;
+    private final int putFile = 2;
+    private final int getFile = 3;
+    private final int exit = 4;
 
     public void startUI() {
         int menu = 0;
         while (menu != 4) {
-            System.out.println("Выберите действие");
-            System.out.println(" 1 - указать кэшируемую директорию");
-            System.out.println(" 2 - загрузить содержимое файла в кэш");
-            System.out.println(" 3 - получить содержимое файла из кэша");
-            System.out.println(" 4 - выход");
+            System.out.println(startText);
             menu = scanner.nextInt();
             action(menu);
         }
@@ -27,16 +27,16 @@ public class Emulator {
 
     private void action(int action) {
         switch (action) {
-            case 1:
+            case setDir:
                cachingDir();
                 break;
-            case 2:
+            case putFile:
                 toCache();
                 break;
-            case 3:
+            case getFile:
                 getFile();
                 break;
-            case 4:
+            case exit:
                 System.out.println("Выход");
                 break;
             default:
@@ -56,9 +56,7 @@ public class Emulator {
     private void toCache() {
         System.out.println("Укажите файл для отправки в кэш ");
         String key = scanner.next();
-        String text = dirFileCache.load(key);
-        System.out.println(text);
-
+        dirFileCache.put(key, dirFileCache.load(key));
     }
 
     private void getFile() {

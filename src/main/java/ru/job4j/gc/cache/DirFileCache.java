@@ -15,11 +15,6 @@ public class DirFileCache extends AbstractCache<String, String> {
         this.cachingDir = cachingDir;
     }
 
-    @Override
-    public void put(String key, String value) {
-        SoftReference<String> file = new SoftReference<>(value);
-        cache.put(key, file);
-    }
 
     @Override
     protected String load(String key) {
@@ -29,19 +24,9 @@ public class DirFileCache extends AbstractCache<String, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        put(key, text);
         return text;
     }
 
-    @Override
-    public String get(String key) {
-        SoftReference<String> valueSoft =  cache.getOrDefault(key, null);
-        String valueStrong = valueSoft.get();
-        if (valueStrong == null) {
-            valueStrong =  load(key);
-        }
-        return valueStrong;
-    }
 
     @Override
     public String toString() {
