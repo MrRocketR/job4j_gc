@@ -12,10 +12,10 @@ public class Emulator {
     3 - получить содержимое файла из кэша
     4 - выход
     """;
-    private final int DIR = 1;
-    private final int PUT = 2;
-    private final int GET = 3;
-    private final int EXIT = 4;
+    static final int DIR = 1;
+    static final int PUT = 2;
+    static final int GET = 3;
+    static final int EXIT = 4;
 
     public void startUI() {
         int menu = 0;
@@ -28,20 +28,11 @@ public class Emulator {
 
     private void action(int action) {
         switch (action) {
-            case DIR:
-               cachingDir();
-                break;
-            case PUT:
-                toCache();
-                break;
-            case GET:
-                getFile();
-                break;
-            case EXIT:
-                System.out.println("Выход");
-                break;
-            default:
-                System.out.println("Ошибка ввода!");
+            case DIR -> cachingDir();
+            case PUT -> toCache();
+            case GET -> getFile();
+            case EXIT -> System.out.println("Выход");
+            default -> System.out.println("Ошибка ввода!");
         }
     }
 
