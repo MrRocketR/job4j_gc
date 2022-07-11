@@ -5,20 +5,21 @@ import java.util.Scanner;
 public class Emulator {
     private DirFileCache dirFileCache;
     private final Scanner scanner = new Scanner(System.in);
-    private final String startText =
-            "Выберите действие" + System.lineSeparator()
-    + " 1 - указать кэшируемую директорию" + System.lineSeparator()
-    + " 2 - загрузить содержимое файла в кэш" + System.lineSeparator()
-    + " 3 - получить содержимое файла из кэша" + System.lineSeparator()
-    + " 4 - выход";
-    private final int setDir = 1;
-    private final int putFile = 2;
-    private final int getFile = 3;
-    private final int exit = 4;
+    private final String startText = """
+            Выберите действие
+    1 - указать кэшируемую директорию
+    2 - загрузить содержимое файла в кэш
+    3 - получить содержимое файла из кэша
+    4 - выход
+    """;
+    private final int DIR = 1;
+    private final int PUT = 2;
+    private final int GET = 3;
+    private final int EXIT = 4;
 
     public void startUI() {
         int menu = 0;
-        while (menu != 4) {
+        while (menu != EXIT) {
             System.out.println(startText);
             menu = scanner.nextInt();
             action(menu);
@@ -27,16 +28,16 @@ public class Emulator {
 
     private void action(int action) {
         switch (action) {
-            case setDir:
+            case DIR:
                cachingDir();
                 break;
-            case putFile:
+            case PUT:
                 toCache();
                 break;
-            case getFile:
+            case GET:
                 getFile();
                 break;
-            case exit:
+            case EXIT:
                 System.out.println("Выход");
                 break;
             default:
