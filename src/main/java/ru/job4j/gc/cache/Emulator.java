@@ -12,10 +12,10 @@ public class Emulator {
     3 - получить содержимое файла из кэша
     4 - выход
     """;
-    static final int DIR = 1;
-    static final int PUT = 2;
-    static final int GET = 3;
-    static final int EXIT = 4;
+    public static final int DIR = 1;
+    public static final int PUT = 2;
+    public static final int GET = 3;
+    public static final int EXIT = 4;
 
     public void startUI() {
         int menu = 0;
@@ -48,7 +48,7 @@ public class Emulator {
     private void toCache() {
         System.out.println("Укажите файл для отправки в кэш ");
         String key = scanner.next();
-        dirFileCache.put(key, dirFileCache.load(key));
+        dirFileCache.put(key, dirFileCache.get(key));
     }
 
     private void getFile() {
